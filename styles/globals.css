@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: #271a67;
+  margin: 0 auto;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +17,18 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+}
+h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 17px;
 }

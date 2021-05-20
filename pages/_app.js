@@ -1,7 +1,5 @@
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const Rubia = ({ Component, pageProps }) => <Component {...pageProps} />
 
-export default MyApp
+export default Rubia;
