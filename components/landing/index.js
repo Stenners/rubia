@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import Logo from '../logo';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Logo from "../logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { StoryblokContext } from "../../pages/index";
 
-const mobWidth = '700px';
+const mobWidth = "700px";
 
-const Wrapper = styled.section `
+const Wrapper = styled.section`
   width: 100vw;
   height: 100vh;
   /* background-color: pink; */
 `;
 
-const Bg = styled.div `
-  background-image: url('/images/waterbg.jpg');
+const Bg = styled.div`
+  background-image: url("/images/waterbg.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-position: center center;
@@ -35,9 +36,9 @@ const Bg = styled.div `
   }
 `;
 
-const Tagline = styled.h2 `
-  letter-spacing: 0.5em!important;
-  margin: 0!important;
+const Tagline = styled.h2`
+  letter-spacing: 0.5em !important;
+  margin: 0 !important;
   font-size: 22px;
   display: flex;
   align-self: flex-end;
@@ -47,16 +48,17 @@ const Tagline = styled.h2 `
   }
 `;
 
-const Address = styled.h2 `
+const Address = styled.h2`
+  text-transform: uppercase;
   font-size: 16px;
   margin-bottom: 21px;
 `;
 
-const PhoneButton = styled.a `
+const PhoneButton = styled.a`
   padding: 8px 45px;
   font-size: 12px;
   color: #fff;
-  border: 2px solid rgba(255,255,255,.75);
+  border: 2px solid rgba(255, 255, 255, 0.75);
   border-radius: 2px;
   font-weight: 300;
   text-decoration: none;
@@ -66,44 +68,34 @@ const PhoneButton = styled.a `
   }
 `;
 
-class Landing extends Component {
+const Landing = () => {
+  const [loading, setLoading] = useState(true);
+  const { content } = React.useContext(StoryblokContext);
+  let image;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false
-    };
-  }
+  const handleImageLoaded = () => {
+    setLoading(false);
+  };
 
-  handleImageLoaded = () => {
-    console.log('loaded');
-    this.setState({loading: false});
-  }
+  useEffect(() => {
+    image = new Image();
+    image.src = "/images/waterbg.jpg";
+    image.onload = handleImageLoaded();
+  }, []);
 
-  componentDidMount() {
-    this.setState({loading: true});
-    this.image = new Image();
-    this.image.src = '/images/waterbg.jpg';
-    this.image.onload = this.handleImageLoaded;
-  }
-
-  render() {
-    const loading = this.state.loading;
-    return (
-      <Wrapper>
-        <Bg style={!loading ? {'opacity': 1} : {'opacity': 0}}>
-          <Logo/>
-          <Tagline>Hair Design</Tagline>
-          <Address>SHOP 3, 549 SYDNEY ROAD SEAFORTH</Address>
-          <PhoneButton href="tel:02-8068-9825">
-            <FontAwesomeIcon icon={faPhone} />
-            (02) 8068 9825
-          </PhoneButton>
-        </Bg>
-      </Wrapper>
-    );
-  }
-
-}
+  return (
+    <Wrapper>
+      <Bg style={!loading ? { opacity: 1 } : { opacity: 0 }}>
+        <Logo />
+        <Tagline>{content.tagline}</Tagline>
+        <Address>{content.address}</Address>
+        <PhoneButton href={`tel:${content.phone}`}>
+          <FontAwesomeIcon icon={faPhone} />
+          (02) 8068 9825
+        </PhoneButton>
+      </Bg>
+    </Wrapper>
+  );
+};
 
 export default Landing;
