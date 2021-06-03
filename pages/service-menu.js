@@ -145,7 +145,6 @@ export async function getStaticProps(context) {
       story: story || false,
       preview: context.preview || false,
     },
-    revalidate: 10,
   };
 }
 
