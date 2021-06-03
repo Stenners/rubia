@@ -143,7 +143,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       story: story || false,
-      preview: true,
+      preview: context.preview || false,
     },
     revalidate: 10,
   };
