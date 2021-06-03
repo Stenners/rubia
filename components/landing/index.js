@@ -4,6 +4,7 @@ import Logo from "../logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { StoryblokContext } from "../../pages/index";
+import SbEditable from 'storyblok-react';
 
 const mobWidth = "700px";
 
@@ -87,12 +88,12 @@ const Landing = () => {
     <Wrapper>
       <Bg style={!loading ? { opacity: 1 } : { opacity: 0 }}>
         <Logo />
-        <Tagline>{content.tagline}</Tagline>
-        <Address>{content.address}</Address>
-        <PhoneButton href={`tel:${content.phone}`}>
-          <FontAwesomeIcon icon={faPhone} />
-          (02) 8068 9825
-        </PhoneButton>
+          <Tagline>{content.tagline}</Tagline>
+          <Address>{content.address}</Address>
+          <PhoneButton href={`tel:${content.phone}`}>
+            <FontAwesomeIcon icon={faPhone} />
+            {content.phone}
+          </PhoneButton>
       </Bg>
     </Wrapper>
   );

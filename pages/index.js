@@ -4,16 +4,15 @@ import Landing from "../components/landing";
 import Hours from "../components/hours";
 import Contact from "../components/contact";
 import GreyMap from "../components/map";
-import { getData } from "../libs/storyblok";
+import { getData, useStoryblok } from "../libs/storyblok";
 
 export const StoryblokContext = createContext();
 
 const Home = ({ story, preview }) => {
-  
+  story = useStoryblok(story, preview);
   return (
     <StoryblokContext.Provider value={story}>
       <Header nude />
-      {/* <SEO title="Home" /> */}
       <Landing />
       <Hours />
       <Contact />
@@ -23,8 +22,8 @@ const Home = ({ story, preview }) => {
 };
 
 export async function getStaticProps(context) {
-  const { story } = await getData('home-page', context);
-  
+  const { story } = await getData("home-page", context);
+
   return {
     props: {
       story: story || false,

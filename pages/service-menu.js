@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/header";
-import { getData } from "../libs/storyblok";
+import { getData, useStoryblok } from "../libs/storyblok";
 
 const mobWidth = "700px";
 
@@ -109,7 +109,8 @@ const pricingArr = [
   },
 ];
 
-const ServiceMenu = ({ story }) => {
+const ServiceMenu = ({ story, preview }) => {
+  story = useStoryblok(story, preview)
   const items = story?.content?.blocks;
   return (
     <>
@@ -142,7 +143,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       story: story || false,
-      preview: context.preview || false,
+      preview: true,
     },
     revalidate: 10,
   };
