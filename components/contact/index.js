@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { StoryblokContext } from "../../pages/index";
 
 const mobWidth = '700px';
 
@@ -53,7 +54,9 @@ const IconWrapper = styled.div`
     }
 `;
 
-const Contact = () => (
+const Contact = () => {
+    const { content } = React.useContext(StoryblokContext);
+    return (
     <ContactWrapper>
         <h2>Contact</h2>
         <Row>
@@ -62,7 +65,7 @@ const Contact = () => (
             </IconWrapper>
             <div>
                 <h4>Call us</h4>
-                <p>(02) 8068 9825</p>
+                <p>{content.phone}</p>
             </div>
         </Row>
         <Row>
@@ -71,10 +74,11 @@ const Contact = () => (
             </IconWrapper>
             <div>
                 <h4>Address</h4>
-                <p>Shop 3, 549 Sydney Road Seaforth, 2092</p>
+                <p>{content.address}</p>
             </div>
         </Row>
     </ContactWrapper>
-);
+)
+    };
 
 export default Contact
