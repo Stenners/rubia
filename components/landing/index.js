@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Logo from "../logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { StoryblokContext } from "../../pages/index";
-import SbEditable from 'storyblok-react';
 
 const mobWidth = "700px";
 
@@ -71,7 +70,7 @@ const PhoneButton = styled.a`
 
 const Landing = () => {
   const [loading, setLoading] = useState(true);
-  const { content } = React.useContext(StoryblokContext);
+  const { content } = useContext(StoryblokContext);
   let image;
 
   const handleImageLoaded = () => {
@@ -88,12 +87,12 @@ const Landing = () => {
     <Wrapper>
       <Bg style={!loading ? { opacity: 1 } : { opacity: 0 }}>
         <Logo />
-          <Tagline>{content.tagline}</Tagline>
-          <Address>{content.address}</Address>
-          <PhoneButton href={`tel:${content.phone}`}>
-            <FontAwesomeIcon icon={faPhone} />
-            {content.phone}
-          </PhoneButton>
+        <Tagline>{content.tagline}</Tagline>
+        <Address>{content.address}</Address>
+        <PhoneButton href={`tel:${content.phone}`}>
+          <FontAwesomeIcon icon={faPhone} />
+          {content.phone}
+        </PhoneButton>
       </Bg>
     </Wrapper>
   );

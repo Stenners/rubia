@@ -15,7 +15,6 @@ export default async function preview(req, res) {
     const cookies = res.getHeader('Set-Cookie')
     res.setHeader('Set-Cookie', cookies.map((cookie) => cookie.replace('SameSite=Lax', 'SameSite=None;Secure')))
  
-    console.log('cookies', cookies);
     // Redirect to the path from entry
     res.redirect(`/${slug}?${params[1]}`)
   }

@@ -30,8 +30,8 @@ class GreyMap extends Component {
 
   static defaultProps = {
     center: {
-      lat: -33.7971976,
-      lng: 151.2493373
+      lat: -33.77522262906519,
+      lng: 151.26261089833844
     },
     zoom: 14
   };
@@ -65,8 +65,8 @@ class GreyMap extends Component {
           options={this.createMapOptions}
         >
         <Marker
-            lat={-33.7971976}
-            lng={151.2493373}
+            lat={center.lat}
+            lng={center.lng}
           />
         </GoogleMapReact>
       </div>

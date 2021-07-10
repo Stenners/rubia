@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/header";
 import { getData, useStoryblok } from "../libs/storyblok";
+import SbEditable from 'storyblok-react';
 
 const mobWidth = "700px";
 
@@ -46,69 +47,6 @@ const Divider = styled.hr`
   margin: 1rem 0;
 `;
 
-const pricingArr = [
-  {
-    title: "Colour",
-    desc: "Foils with style cut and blow dry",
-    prices: [
-      { "1/2 head foils": "from $160" },
-      { "Full head foils": "from $190" },
-      { "Balayage and Ombres": "from $170" },
-    ],
-  },
-  {
-    title: "Permanent Color",
-    desc: "with cut and Blow Wave",
-    prices: [
-      { Tint: "from $145" },
-      { "Tint and foils": "from $165" },
-      { "Tint and demi": "from $170" },
-      { "Tint, foils and demi": "from $180" },
-      { "Hairline only": "$35" },
-    ],
-  },
-  {
-    title: "Keratin Smoothing",
-    prices: [{ "": "from $150" }],
-  },
-  {
-    title: "Bridal",
-    prices: [{ "": "from $100pp" }],
-  },
-  {
-    title: "Demi permanent colour",
-    desc: "With cut and style",
-    prices: [
-      { "Demi tint": "from $140" },
-      { "Demi tint with foils": "from $160" },
-      { "Colour correction": "from $180" },
-      { "Extra colour / brights and pastels": "from $25" },
-    ],
-  },
-  {
-    title: "Styling",
-    prices: [
-      { "Blow wave short hair": "$45" },
-      { "Blow wave long hair": "from $50" },
-      { "Up style": "from $80" },
-    ],
-  },
-  {
-    title: "Cut and Style",
-    desc: "All haircuts include a shampoo and Blow Wave",
-    prices: [
-      { "Womens style cut": "from $75" },
-      { "Mens style cut": "$40" },
-      { "Uni students women": "$65" },
-      { "Uni students men": "$32" },
-      { "Highschool girls": "$60" },
-      { "Highschool boys": "$30" },
-      { "Primary school girls": "$40" },
-      { "Primary school boys": "$25" },
-    ],
-  },
-];
-
 const ServiceMenu = ({ story, preview }) => {
   story = useStoryblok(story, preview)
   const items = story?.content?.blocks;
@@ -119,6 +57,7 @@ const ServiceMenu = ({ story, preview }) => {
         <h2>Service Menu</h2>
         <PricingTable>
           {items.map((item) => (
+            <SbEditable content={item}>
             <Col key={item?.title}>
               <h3>{item.title}</h3>
               {item.description && <h4>{item.description}</h4>}
@@ -130,6 +69,7 @@ const ServiceMenu = ({ story, preview }) => {
               ))}
               <Divider />
             </Col>
+            </SbEditable>
           ))}
         </PricingTable>
       </Container>
