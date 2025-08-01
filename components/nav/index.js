@@ -78,7 +78,7 @@ class Nav extends React.Component {
       <NavWrapper>
         <Menu right isOpen={this.state.menuOpen}>
           <Link href="/">Home</Link>
-          <Link href="/service-menu">Service Menu</Link>
+          {/* <Link href="/service-menu">Service Menu</Link> */}
           <Link href="/gallery">Gallery</Link>
           {/* <Link href="/contact">Contact</Link> */}
         </Menu>

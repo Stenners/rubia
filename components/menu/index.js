@@ -20,9 +20,9 @@ const Menu = (props) => {
       <Link activeClassName="active" href="/">
         Home
       </Link>
-      <Link activeClassName="active" href="/service-menu">
+      {/* <Link activeClassName="active" href="/service-menu">
         Service Menu
-      </Link>
+      </Link> */}
       <Link activeClassName="active" href="/gallery">
         Gallery
       </Link>

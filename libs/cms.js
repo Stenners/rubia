@@ -17,12 +17,17 @@ var results = document.getElementById("results"),
   messageButton = document.getElementById("message_button");
 
 // Listen to messages from parent window
-bindEvent(window, "message", function (e) {
-  const data = JSON.parse(e.data);
-  if (data?.source === 'stenners-cms') {
-    console.log(`RUBIA => ${JSON.stringify(data)}`);
-  }
-});
+// bindEvent(window, "message", function (e) {
+//   if (e.data) {
+//     console.log(`RUBIA => ${JSON.stringify(e)}`);
+//     const data = JSON.parse(e.data);
+//     if (data?.source === "stenners-cms") {
+//       console.log(`RUBIA => ${JSON.stringify(data)}`);
+//     }
+//   } else {
+//     console.log(`RUBIA => ${JSON.stringify(e)}`);
+//   }
+// });
 
 // Send random message data on every button click
 bindEvent(messageButton, "click", function (e) {
@@ -31,10 +36,6 @@ bindEvent(messageButton, "click", function (e) {
 });
 
 export const Editable = ({ children }) => {
-    const marker = "<!-- stenners-cms -->";
-    return (
-        <>
-     
-        </>
-    )
-}
+  const marker = "<!-- stenners-cms -->";
+  return <></>;
+};
