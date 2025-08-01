@@ -4,4 +4,4 @@ publish = ".next"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
-version = "5.12.0"
+pinned_version = "5.12.0"
