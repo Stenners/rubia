@@ -15,6 +15,10 @@ const nextConfig = {
   experimental: {
     esmExternals: 'loose',
   },
+  // Disable image optimization to avoid sharp dependency issues
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
