@@ -1,6 +1,11 @@
 [build]
-  command = "npm run build"
+  command = "npm run build:static"
   publish = "out"
 
 [build.environment]
-  NPM_FLAGS = "--legacy-peer-deps" 
+  NPM_FLAGS = "--legacy-peer-deps"
+  SKIP_PLUGIN_INSTALL = "true"
+  DISABLE_PLUGINS = "true"
+
+[[plugins]]
+  package = "" 
