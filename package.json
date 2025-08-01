@@ -4,30 +4,27 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "build:static": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "export": "next build && next export"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
-    "axios": "^1.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^1.6.7",
     "google-map-react": "^2.2.5",
-    "next": "^11.1.4",
-    "react": "^17.0.2",
-    "react-burger-menu": "^3.0.6",
-    "react-dom": "^17.0.2",
-    "react-ig-feed": "^1.7.0",
-    "styled-components": "^5.3.10"
+    "next": "^15.4.5",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/runtime": "^7.28.2",
-    "babel-plugin-styled-components": "^1.12.0"
+    "@babel/core": "^7.24.0",
+    "@babel/plugin-transform-runtime": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/runtime": "^7.24.0",
+    "babel-plugin-styled-components": "^2.1.4"
   }
 }

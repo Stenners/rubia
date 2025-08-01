@@ -1,90 +1,111 @@
-import React from "react";
-import { slide as Menu } from "react-burger-menu";
+import React, { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
 const NavWrapper = styled.div`
-  .bm-burger-button {
+  .hamburger {
     position: absolute;
-    width: 24px;
-    height: 17px;
     right: 0;
     top: 26px;
+    width: 24px;
+    height: 17px;
+    cursor: pointer;
+    z-index: 1000;
   }
 
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
     background: #ffffff;
     border-radius: 1px;
+    transition: all 0.3s ease;
+    margin-bottom: 4px;
   }
 
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 24px;
-    width: 24px;
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
   }
 
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: #ffffff;
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
   }
 
-  /* General sidebar styles */
-  .bm-menu {
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menu-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
     background: #1a1052;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
-    a {
-      color: white;
-      padding: 1rem 0;
-    }
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
 
-  /* Wrapper for item list */
-  .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
-    display: flex;
-    flex-direction: column;
+  .menu-sidebar.active {
+    transform: translateX(0);
   }
 
-  .bm-menu-wrap {
-    top: 0;
-    transition: all 0.3s !important;
-  }
-
-  /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-    top: 0;
-    left: 0;
+  .menu-sidebar a {
+    color: white;
+    padding: 1rem 0;
+    display: block;
+    text-decoration: none;
   }
 `;
 
-class Nav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuOpen: false,
-    };
-  }
+const Nav = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-  handleStateChange() {
-    this.setState({ menuOpen: !this.state.menuOpen });
-  }
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-  render() {
-    return (
-      <NavWrapper>
-        <Menu right isOpen={this.state.menuOpen}>
-          <Link href="/">Home</Link>
-          {/* <Link href="/service-menu">Service Menu</Link> */}
-          <Link href="/gallery">Gallery</Link>
-          {/* <Link href="/contact">Contact</Link> */}
-        </Menu>
-      </NavWrapper>
-    );
-  }
-}
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <NavWrapper>
+      <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div className={`menu-overlay ${isOpen ? 'active' : ''}`} onClick={closeMenu}></div>
+      
+      <div className={`menu-sidebar ${isOpen ? 'active' : ''}`}>
+        <Link href="/" onClick={closeMenu}>Home</Link>
+        <Link href="/gallery" onClick={closeMenu}>Gallery</Link>
+      </div>
+    </NavWrapper>
+  );
+};
 
 export default Nav;
