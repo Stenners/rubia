@@ -23,7 +23,7 @@ const InstagramPost = styled.div`
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
   }
@@ -81,46 +81,51 @@ const Gallery = () => {
     const fetchInstagramPosts = async () => {
       try {
         setLoading(true);
-        
+
         // Check if we have the Instagram access token
         const accessToken = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
-        
+
         if (!accessToken) {
-          setError("Instagram access token not configured. Please set NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN in your environment variables.");
+          setPosts([]);
           setLoading(false);
           return;
         }
 
         // Fetch user's media from Instagram Basic Display API
-        const response = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=12`);
-        
-        if (!response.ok) {
-          throw new Error(`Instagram API error: ${response.status}`);
-        }
+        const response = await fetch(
+          `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=12`
+        );
 
         const data = await response.json();
-        
-        if (data.error) {
-          throw new Error(`Instagram API error: ${data.error.message}`);
+
+        // Check if there's an error in the response
+        if (data.error || !data.data) {
+          setPosts([]);
+          setLoading(false);
+          return;
         }
 
         // Filter for image posts and format the data
         const imagePosts = data.data
-          .filter(post => post.media_type === 'IMAGE' || post.media_type === 'CAROUSEL_ALBUM')
-          .map(post => ({
+          .filter(
+            (post) =>
+              post.media_type === "IMAGE" ||
+              post.media_type === "CAROUSEL_ALBUM"
+          )
+          .map((post) => ({
             id: post.id,
             media_url: post.media_url || post.thumbnail_url,
             caption: post.caption || "Instagram post",
             permalink: post.permalink,
-            timestamp: post.timestamp
+            timestamp: post.timestamp,
           }))
           .slice(0, 12); // Limit to 12 posts
 
         setPosts(imagePosts);
         setLoading(false);
       } catch (err) {
-        console.error('Instagram API Error:', err);
-        setError(`Failed to load Instagram posts: ${err.message}`);
+        console.error("Instagram API Error:", err);
+        setPosts([]);
         setLoading(false);
       }
     };
@@ -134,7 +139,7 @@ const Gallery = () => {
         <Header />
         <Container>
           <h2>Gallery</h2>
-          <LoadingMessage>Loading Instagram posts...</LoadingMessage>
+          <LoadingMessage>Loading gallery...</LoadingMessage>
         </Container>
       </>
     );
@@ -146,9 +151,7 @@ const Gallery = () => {
         <Header />
         <Container>
           <h2>Gallery</h2>
-          <SetupMessage>
-            No Instagram posts found. 
-          </SetupMessage>
+          <SetupMessage>No content found.</SetupMessage>
         </Container>
       </>
     );
@@ -162,14 +165,17 @@ const Gallery = () => {
         <GalleryGrid>
           {posts.map((post) => (
             <InstagramPost key={post.id}>
-              <a href={post.permalink} target="_blank" rel="noopener noreferrer">
+              <a
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <PostImage src={post.media_url} alt="Instagram post" />
               </a>
               <PostCaption>
-                {post.caption && post.caption.length > 100 
-                  ? `${post.caption.substring(0, 100)}...` 
-                  : post.caption
-                }
+                {post.caption && post.caption.length > 100
+                  ? `${post.caption.substring(0, 100)}...`
+                  : post.caption}
               </PostCaption>
             </InstagramPost>
           ))}

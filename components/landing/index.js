@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { StoryblokContext } from "../../pages/index";
 
 const mobWidth = "700px";
 
@@ -70,7 +69,6 @@ const PhoneButton = styled.a`
 
 const Landing = () => {
   const [loading, setLoading] = useState(true);
-  const { content } = useContext(StoryblokContext);
   let image;
 
   const handleImageLoaded = () => {
@@ -87,11 +85,11 @@ const Landing = () => {
     <Wrapper>
       <Bg style={!loading ? { opacity: 1 } : { opacity: 0 }}>
         <Logo />
-        <Tagline>{content.tagline}</Tagline>
-        <Address>{content.address}</Address>
-        <PhoneButton href={`tel:${content.phone}`}>
+        {/* <Tagline>SHOP 2, 46-52 KENTWELL ROAD ALLAMBIE HEIGHTS</Tagline> */}
+        <Address>SHOP 2, 46-52 KENTWELL ROAD ALLAMBIE HEIGHTS</Address>
+        <PhoneButton href="tel:(555) 123-4567">
           <FontAwesomeIcon icon={faPhone} />
-          {content.phone}
+          0408 670 848
         </PhoneButton>
       </Bg>
     </Wrapper>

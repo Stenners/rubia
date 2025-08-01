@@ -1,4 +1,20 @@
 {
-  "presets": ["next/babel"],
-  "plugins": [["styled-components", { "ssr": true }]]
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {},
+        "preset-react": {
+          "runtime": "automatic"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["styled-components", { "ssr": true }],
+    ["@babel/plugin-transform-runtime", {
+      "regenerator": true,
+      "corejs": false
+    }]
+  ]
 }

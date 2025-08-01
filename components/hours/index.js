@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { StoryblokContext } from "../../pages/index";
 
 const mobWidth = "700px";
 
@@ -39,16 +38,23 @@ const Row = styled.div`
 `;
 
 const Hours = () => {
-  const { content } = React.useContext(StoryblokContext);
-  const days = content.hours.thead;
-  const hours = content.hours.tbody[0].body;
+  // Static hours data - replace with your actual hours
+  const hoursData = [
+    { day: "Sun and Mon", hours: "Closed" },
+    { day: "Tues", hours: "10am - 8:30pm" },
+    { day: "Wed", hours: "Closed" },
+    { day: "Thurs", hours: "Closed" },
+    { day: "Fri", hours: "8:30am - 5:30pm"},
+    { day: "Sat", hours: "8am - 4pm" }
+  ];
+
   return (
     <HoursWrapper>
       <h2>Hours</h2>
-      {days.map((day, i) => (
-        <Row>
-          <div>{day.value}</div>
-          <div>{hours[i].value}</div>
+      {hoursData.map((item, i) => (
+        <Row key={i}>
+          <div>{item.day}</div>
+          <div>{item.hours}</div>
         </Row>
       ))}
     </HoursWrapper>
